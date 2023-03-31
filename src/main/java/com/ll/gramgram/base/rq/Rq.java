@@ -5,7 +5,6 @@ import com.ll.gramgram.boundedContext.member.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -50,13 +49,21 @@ public class Rq {
 
     // 로그인 된 회원의 객체
     public Member getMember() {
-        if ( isLogout() ) return null;
+        if (isLogout()) return null;
 
         // 데이터가 없는지 체크
-        if ( member == null ) {
+        if (member == null) {
             member = memberService.findByUsername(user.getUsername()).orElseThrow();
         }
 
         return member;
+    }
+
+    public String historyBack(String msg) {
+        String referer = req.getHeader("referer");
+        String key = "historyBackErrorMsg___" + referer;
+        req.setAttribute("localStorageKeyAboutHistoryBackErrorMsg", key);
+        req.setAttribute("historyBackErrorMsg", msg);
+        return "common/js";
     }
 }
