@@ -60,4 +60,12 @@ public class LikeablePersonController {
 
         return "usr/likeablePerson/list";
     }
+
+    @GetMapping("/list")
+    public String DeleteList(@RequestParam("id") int id) throws Exception{
+
+        return rq.redirectWithMsg("/LikeablePerson/list", "해당 목록이 삭제되었습니다.");
+    }
+}
+
 }
