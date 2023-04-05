@@ -48,4 +48,7 @@ public class LikeablePersonService {
     public List<LikeablePerson> findByFromInstaMemberId(Long fromInstaMemberId) {
         return likeablePersonRepository.findByFromInstaMemberId(fromInstaMemberId);
     }
+    public static void ListDelete(int id) throws Exception{
+        LikeablePerson.ListDelete(id);
+    }
 }
